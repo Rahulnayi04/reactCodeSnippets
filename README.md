@@ -92,32 +92,48 @@ export default App;
 # Question 3
 Find the issue
 ```
-import React from "react";
- function App() {
-  const items = [
-	{ id: 1, text: "Item 1" },
-	{ id: 2, text: "Item 2" },
-  ];
-  const listItems = items.map((item, index) => <li key={index}>{item.text}</li>);
-  return <ul>{listItems}</ul>;
+import React, { useCallback, useState } from "react";
+function App() {
+  const [count, setCount] = useState(0);
+ 
+  const increment = useCallback(() => {
+	setCount(count + 1);
+  }, []);
+   return (
+	<div>
+  	<button onClick={increment}>Increment</button>
+  	<p>Count: {count}</p>
+	</div>
+  );
 }
+ 
 export default App;
 ```
 Resolved
+The issue in the code you provided is with the useCallback dependency array. In the current implementation, the dependency array is empty ([]), indicating that the increment function should not have any dependencies. However, the increment function references the count state variable inside its body.
+
+Since the count state variable is a dependency for the increment function, it should be included in the dependency array of the useCallback hook. This ensures that the increment function gets the latest value of count whenever it is invoked.
+
+To fix the issue, you should include [count] as the dependency array for the useCallback hook:
 ```
-import React from "react";
+import React, { useCallback, useState } from "react";
 
 function App() {
-  const items = [
-    { id: 1, text: "Item 1" },
-    { id: 2, text: "Item 2" },
-  ];
+  const [count, setCount] = useState(0);
 
-  const listItems = items.map((item) => <li key={item.id}>{item.text}</li>);
+  const increment = useCallback(() => {
+    setCount((prevCount) => prevCount + 1);
+  }, [count]);
 
-  return <ul>{listItems}</ul>;
+  return (
+    <div>
+      <button onClick={increment}>Increment</button>
+      <p>Count: {count}</p>
+    </div>
+  );
 }
 
 export default App;
+
 ```
 
