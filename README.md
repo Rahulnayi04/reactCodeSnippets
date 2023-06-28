@@ -1,7 +1,6 @@
 # reactCodeSnippets
 
-#Question 1 - Find the issue in below code
-
+# Find the issue 
 ```
 import React from "react";
  function App() {
@@ -15,9 +14,10 @@ import React from "react";
 export default App;
 ```
 
-#answer 1 
+# Resolved
 Returned JSX is not wrapped with parent JSX
+```
 <><ul>{listItems}</ul></>
 <Fragment><ul>{listItems}</ul></Fragment>
-
+```
 
