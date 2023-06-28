@@ -1,4 +1,4 @@
-# Practice  :  React Code Snippets           BEST WAY TO LEARN REACT
+# Practice  :  React Code Snippets          (BEST WAY TO LEARN REACT)
 
 # Question 1
 Find the issue
