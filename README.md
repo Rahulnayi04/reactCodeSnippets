@@ -1,6 +1,7 @@
 # reactCodeSnippets
 
 #Question 1 - Find the issue in below code
+
 import React from "react";
  function App() {
   const items = [
