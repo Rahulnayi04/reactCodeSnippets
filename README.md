@@ -137,3 +137,87 @@ export default App;
 
 ```
 
+
+
+# Question 4
+Find the issue
+```
+function TestComponent(props) {
+  const [count, setCount] = useState(props.initialCount);
+  const handleClick = () => {
+    setCount(count + 1);
+  };
+ return (
+	<div>
+      <p>Count: {count}</p>
+      <button onClick={handleClick}>Increment</button>
+    </div>
+  );
+}
+```
+Resolved
+The issue in the provided code is related to the closure created by the handleClick function that is referencing the initial value of count from the useState hook.
+
+When the component is rendered, the handleClick function is created and captures the initial value of count as a closure. However, subsequent updates to the count state will not affect the captured value inside the handleClick function. Therefore, when the button is clicked, the count state is not properly updated.
+
+To fix this issue, you can use the functional form of the setCount function provided by the useState hook. This allows you to update the state based on its previous value, ensuring that the latest value is used:
+```
+function TestComponent(props) {
+  const [count, setCount] = useState(props.initialCount);
+  
+  const handleClick = () => {
+    setCount((prevCount) => prevCount + 1);
+  };
+  
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={handleClick}>Increment</button>
+    </div>
+  );
+}
+
+
+```
+
+
+
+# Question 5
+Find the issue
+```
+import { useState } from "react";
+import axios from "axios";
+function MyComponent() {
+  const [data, setData] = useState([]);
+ useEffect(() => {
+    axios.get("/api/data").then((response) => {
+      setData(response.data);
+    });
+  }, []);
+ 
+  return <div>{data.map((d) => <p>{d.text}</p>)}</div>;
+}
+```
+Resolved
+Using the spread operator when updating state with an array is a best practice to ensure immutability. In the code snippet you provided, using the spread operator is recommended when updating the data state.
+
+Here's the updated code snippet using the spread operator:jsx
+```
+import { useState } from "react";
+import axios from "axios";
+function MyComponent() {
+  const [data, setData] = useState([]);
+ useEffect(() => {
+    axios.get("/api/data").then((response) => {
+      setData([...response.data]);
+    });
+  }, []);
+ 
+  return <div>{data.map((d) => <p>{d.text}</p>)}</div>;
+}
+
+```
+
+
+
+
