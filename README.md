@@ -1,8 +1,8 @@
 # reactCodeSnippets
 
 #Question 1 - Find the issue in below code
-[
 
+```
 import React from "react";
  function App() {
   const items = [
@@ -13,8 +13,8 @@ import React from "react";
   return <ul>{listItems}</ul>;
 }
 export default App;
+```
 
-]
 #answer 1 
 Returned JSX is not wrapped with parent JSX
 <><ul>{listItems}</ul></>
