@@ -199,6 +199,7 @@ function MyComponent() {
 }
 ```
 Resolved
+
 Using the spread operator when updating state with an array is a best practice to ensure immutability. In the code snippet you provided, using the spread operator is recommended when updating the data state.
 
 Here's the updated code snippet using the spread operator:jsx
